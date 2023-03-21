@@ -5,6 +5,7 @@ import About from './components/about/About'
 import Skills from './components/skills/Skills'
 import Experience from './components/experience/Experience'
 import Services from './components/services/Services'
+import Certifications from './components/certifications/Certifications'
 import Portfolio from './components/portfolio/Portfolio'
 import Testimonials from './components/testimonials/Testimonials'
 import Contact from './components/contact/Contact'
@@ -19,7 +20,7 @@ const App = () => {
         <About/>
         <Experience/>
         <Skills/>
-        <Services/>
+        <Certifications/>
         <Portfolio/>
         <Testimonials/>
         <Contact/>
