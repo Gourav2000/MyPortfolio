@@ -17,7 +17,7 @@ const data = [
     {
         title: "Software Developer, Intern",
         work: [
-            "Adorae: Mobile social application development (Flutter/ Android Native). Worked on a social fashion networking app that allows users to share photos of their outfits and tag the brands they are wearing so that other users can browse and also purchase from the linked website. <a href='https://play.google.com/store/apps/details?id=in.applore.adorae'>Playstore link</a>",
+            "Adorae: Mobile social application development (Flutter/ Android Native). Worked on a social fashion networking app that allows users to share photos of their outfits and tag the brands they are wearing so that other users can browse and also purchase from the linked website. <a href=\"https://play.google.com/store/apps/details?id=in.applore.adorae\">Playstore link</a>",
             "JK Maintenance App: Dashboard development(Flutter/ React/ MongoDB/ Nodejs). Worked on an application developed for the convenience of the JK tyres employees. Assigning tasks, creating checklists, maintaining the calendar, raising tickets and much more in one place."
         ],
         place: "Noida, India",
@@ -92,7 +92,7 @@ const Experience = () => {
                                 </div>
                                 <ul className='custom-bullets'>
                                     {data[index].work.map((item, indexi) => (
-                                        <li key={indexi}><small>{item}</small></li>
+                                        <li key={indexi}><small dangerouslySetInnerHTML={{__html: item}}></small></li>
                                     ))}
                                 </ul>
                             </div>
