@@ -8,7 +8,7 @@
   The first version of <a href="https://gourav2000.github.io/MyPortfolio/" target="_blank">gourav2000.github.io/MyPortfolio/</a> built with <a href="https://react.dev/" target="_blank">React</a> and hosted with <a href="https://pages.github.com/" target="_blank">Github Pages</a>
 </p>
 
-![demo](https://raw.githubusercontent.com/bchiang7/v4/main/src/images/demo.png)
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/56431415/233920695-84ae1488-0193-48f2-b9e2-16bd5a319cd9.png">
 
 ## 🛠 Installation & Set Up
 
