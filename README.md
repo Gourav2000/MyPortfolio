@@ -10,45 +10,25 @@
 
 <img width="960" alt="image" src="https://user-images.githubusercontent.com/56431415/233920695-84ae1488-0193-48f2-b9e2-16bd5a319cd9.png">
 
-## 🛠 Installation & Set Up
+## Installation
 
-1. Install the Gatsby CLI
+1. Clone the repository: `git clone https://github.com/Gourav2000/MyPortfolio/edit/master/README.md`
+2. Navigate to the project directory: `cd MyPortfolio`
+3. Install dependencies: `npm install`
 
-   ```sh
-   npm install -g gatsby-cli
-   ```
+## Usage
 
-2. Install and use the correct version of Node using [NVM](https://github.com/nvm-sh/nvm)
+1. Start the development server: `npm start`
+2. Open [http://localhost:3000](http://localhost:3000) in a browser.
 
-   ```sh
-   nvm install
-   ```
 
-3. Install dependencies
+## Contributing
 
-   ```sh
-   yarn
-   ```
+Contributions are always welcome! If you find a bug or have a feature request, please open an issue or submit a pull request.
 
-4. Start the development server
+## License
 
-   ```sh
-   npm start
-   ```
-
-## 🚀 Building and Running for Production
-
-1. Generate a full static production build
-
-   ```sh
-   npm run build
-   ```
-
-1. Preview the site as it will appear once deployed
-
-   ```sh
-   npm run serve
-   ```
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🎨 Color Reference
 
