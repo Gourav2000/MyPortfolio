@@ -1,9 +1,9 @@
-<div align="center">
-  <img width="959" alt="image" src="https://user-images.githubusercontent.com/56431415/233919714-bd409be1-f9fd-4d2e-82b7-b0b8f9497836.png">
-</div>
 <h1 align="center">
   My Personal Portfolio
 </h1>
+<div align="center">
+  <img width="959" alt="image" src="https://user-images.githubusercontent.com/56431415/233919714-bd409be1-f9fd-4d2e-82b7-b0b8f9497836.png">
+</div>
 <p align="center">
   The first version of <a href="https://gourav2000.github.io/MyPortfolio/" target="_blank">gourav2000.github.io/MyPortfolio/</a> built with <a href="https://react.dev/" target="_blank">React</a> and hosted with <a href="https://pages.github.com/" target="_blank">Github Pages</a>
 </p>
