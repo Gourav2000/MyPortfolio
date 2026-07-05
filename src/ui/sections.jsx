@@ -106,18 +106,36 @@ function ProjectsBody() {
   )
 }
 
+const LinkedInMark = () => (
+  <svg className="testi-li-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z" />
+  </svg>
+)
+
 function TestimonialsBody() {
   return (
     <div className="testi-grid">
-      {SECTIONS.testimonials.reviews.map((r, i) => (
-        <figure className="testi" key={i}>
-          <div className="testi-avatar">
-            <img src={r.avatar} alt={r.name} loading="lazy" />
-          </div>
-          <blockquote>“{r.review}”</blockquote>
-          <figcaption>{r.name}</figcaption>
-        </figure>
-      ))}
+      {SECTIONS.testimonials.reviews.map((r, i) => {
+        const Card = r.linkedin ? 'a' : 'div'
+        const linkProps = r.linkedin
+          ? { href: r.linkedin, target: '_blank', rel: 'noreferrer', title: `${r.name} on LinkedIn` }
+          : {}
+        return (
+          <Card className="testi" key={i} {...linkProps}>
+            <div className="testi-avatar">
+              <img src={r.avatar} alt={r.name} loading="lazy" />
+            </div>
+            <blockquote>“{r.review}”</blockquote>
+            <div className="testi-caption">
+              <span className="testi-name">
+                {r.name}
+                {r.linkedin && <LinkedInMark />}
+              </span>
+              {r.title && <span className="testi-title">{r.title}</span>}
+            </div>
+          </Card>
+        )
+      })}
     </div>
   )
 }
@@ -128,7 +146,15 @@ function PublicationsBody() {
     <>
       {s.papers.map((p) => (
         <div className="paper" key={p.title}>
-          <h3>{p.title}</h3>
+          <h3>
+            {p.url ? (
+              <a href={p.url} target="_blank" rel="noreferrer">
+                {p.title} <span className="paper-link-icon">↗</span>
+              </a>
+            ) : (
+              p.title
+            )}
+          </h3>
           <div className="meta">
             {p.authors} · <i>{p.venue}</i>
             <span className={`status ${p.status === 'Accepted' ? 'accepted' : ''}`}>{p.status}</span>
@@ -184,7 +210,7 @@ function EducationBody() {
   return (
     <>
       {SECTIONS.education.schools.map((e) => (
-        <div className="job" key={e.school}>
+        <div className="job" key={e.degree}>
           <h3>{e.degree}</h3>
           <div className="meta">
             {e.school} · {e.place} · {e.time}

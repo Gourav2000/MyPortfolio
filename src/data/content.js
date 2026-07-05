@@ -20,10 +20,10 @@ import IMG_AUTOTYPE from '../assets/portfolio9.jpg'
 import BADGE_PCA from '../assets/pca.png'
 import BADGE_ACE from '../assets/ace.png'
 import BADGE_AZ900 from '../assets/az900.png'
-import AVTR1 from '../assets/avatar1.jpg'
-import AVTR2 from '../assets/avatar2.jpg'
-import AVTR3 from '../assets/avatar3.jpg'
-import AVTR4 from '../assets/avatar4.jpg'
+import AVTR_SAI from '../assets/avatar-sai.jpg'
+import AVTR_CLADIUS from '../assets/avatar-cladius.jpg'
+import AVTR_TATHAGATA from '../assets/avatar-tathagata.jpg'
+import AVTR_PARAJ from '../assets/avatar-paraj.jpg'
 
 export const PROFILE = {
   photo: ME,
@@ -181,6 +181,7 @@ export const SECTIONS = {
         venue: 'ICAART 2026 · Marbella, Spain',
         status: 'Published',
         year: '2026',
+        url: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=k5Qjs50AAAAJ&citation_for_view=k5Qjs50AAAAJ:2osOgNQ5qMEC',
       },
       {
         title: 'Agentic AI for Industrial Cooling Systems: Deep RL-Based Optimization with LLM-Enhanced Decision Support',
@@ -188,6 +189,7 @@ export const SECTIONS = {
         venue: 'ISUW 2026 · New Delhi, India',
         status: 'Accepted',
         year: '2026',
+        url: 'https://www.isuw.in/',
       },
       {
         title: 'Multi-Severity Corrosion Classification Using Computer Vision',
@@ -195,9 +197,10 @@ export const SECTIONS = {
         venue: 'ICSOT-INDIA 2023',
         status: 'Published',
         year: '2024',
+        url: 'https://scholar.google.com/citations?view_op=view_citation&hl=en&user=k5Qjs50AAAAJ&citation_for_view=k5Qjs50AAAAJ:qjMakFHDy7sC',
       },
     ],
-    scholar: 'https://scholar.google.com/scholar?q=Gourav+Sarkar+CopperNet',
+    scholar: 'https://scholar.google.com/citations?user=k5Qjs50AAAAJ',
   },
 
   achievements: {
@@ -245,7 +248,7 @@ export const SECTIONS = {
         image: BADGE_PCA,
         time: 'Jan 2023',
         credId: '8fHaXo',
-        url: 'https://www.credential.net/9aea7dd8-d5cd-4f2e-be63-2ad89c41094e?key=52d7eb4ee4e65d14ad8f6130e3491de45fe6ea46d9840cc126f98cb6325d9f85#gs.nb9l40',
+        url: 'https://www.credly.com/badges/09db26e2-eecb-43ce-8ebf-4c61e286f24c/public_url',
       },
       {
         title: 'GCP Associate Cloud Engineer',
@@ -253,7 +256,7 @@ export const SECTIONS = {
         image: BADGE_ACE,
         time: 'Oct 2022',
         credId: '60698263',
-        url: 'https://www.credential.net/5924425b-2751-4cc2-91b0-87813c028790',
+        url: 'https://www.credly.com/badges/94feecc9-77f7-49b9-ac41-c04df0f65ac0/public_url',
       },
       {
         title: 'Microsoft Azure Fundamentals (AZ-900)',
@@ -279,6 +282,20 @@ export const SECTIONS = {
         time: '07/2018 – 06/2022',
         detail: 'CGPA 9.39 / 10',
       },
+      {
+        school: 'B.D. Memorial International',
+        degree: 'Higher Secondary Certificate (Class 12) · Science Stream',
+        place: 'Kolkata, India',
+        time: '07/2016 – 06/2017',
+        detail: '80.0%',
+      },
+      {
+        school: 'B.D. Memorial International',
+        degree: 'Secondary School Certificate (Class 10)',
+        place: 'Kolkata, India',
+        time: '07/2014 – 06/2015',
+        detail: 'CGPA 8.80 / 10',
+      },
     ],
   },
 
@@ -289,28 +306,36 @@ export const SECTIONS = {
     accent: '#ff6ec7',
     reviews: [
       {
-        avatar: AVTR1,
+        avatar: AVTR_SAI,
+        name: 'Sai Kiran Bejugam',
+        title: 'Manager, Software Engineering @ ServiceNow',
+        linkedin: 'https://www.linkedin.com/in/sai-kiran-bejugam/',
+        review:
+          "I've had the pleasure of working closely with Gourav and can confidently say he is a highly dependable and skilled professional. He consistently demonstrates strong technical depth, sharp problem-solving abilities, and a clear understanding of requirements. Gourav takes ownership of his work, delivers high-quality solutions, and handles challenges with a calm, solution-oriented mindset. Beyond his technical strengths, he is a great team player — collaborative, proactive, and always willing to support others. His dedication to continuous learning and improvement truly sets him apart.",
+      },
+      {
+        avatar: AVTR_CLADIUS,
         name: 'Cladius Fernando',
+        title: 'Head, L&D · Agentic AI Architect, AI Academy',
+        linkedin: 'https://www.linkedin.com/in/cladius/',
         review:
           'I interviewed Gourav for a fitment into my project. Halfway into the interview I realized that he is quite passionate about technology and had the attitude required to wrestle with a problem and come out as a victor. He picked up very fast and did a splendid job. I was pleased to work with him. Gourav continues to upskill himself by learning. This coupled with his attitude towards work will take him far in his career.',
       },
       {
-        avatar: AVTR2,
-        name: 'Paraj Bhattacharya',
-        review:
-          'I had the privilege of being acquainted with Gourav during our time in college, where he consistently demonstrated a strong work ethic, exceptional communication skills, and an unyielding commitment to achieving excellence.',
-      },
-      {
-        avatar: AVTR3,
+        avatar: AVTR_TATHAGATA,
         name: 'Tathagata Nandi',
+        title: 'SDE2 @ Hyland R&D · Ex-IBM',
+        linkedin: 'https://www.linkedin.com/in/tathagata-nandi/',
         review:
           "I had the pleasure of working with Gourav in a hackathon, where he served as the lead for our team's project. I was impressed with Gourav's technical skills, leadership abilities, and creativity. He took charge of the project's architecture from the outset and led us through its development, ensuring that our code was modular and efficient. Gourav quickly grasped the project requirements and offered innovative solutions to challenges that arose during the hackathon. His attention to detail and dedication to the project's success was evident throughout, and he was always willing to go the extra mile to ensure that our team delivered a quality product. Overall, I was impressed with his ability to work collaboratively with the team and his passion for technologies.",
       },
       {
-        avatar: AVTR4,
-        name: 'Earnest Achiever',
+        avatar: AVTR_PARAJ,
+        name: 'Paraj Bhattacharjee',
+        title: 'Software Engineer @ Goldman Sachs',
+        linkedin: 'https://www.linkedin.com/in/paraj-bhattacharjee-042547191/',
         review:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam illo distinctio asperiores autem consequuntur reiciendis odio voluptatem molestias. Ex, temporibus.',
+          'I had the privilege of being acquainted with Gourav during our time in college, where they consistently demonstrated a strong work ethic, exceptional communication skills, and an unyielding commitment to achieving excellence.',
       },
     ],
   },

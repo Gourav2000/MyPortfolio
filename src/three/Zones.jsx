@@ -597,7 +597,8 @@ export default function Zones() {
           // -angle so each structure's +z face points back at the plaza
           <group key={z.id} position={[z.x, 0, z.z]} rotation={[0, -z.angle, 0]}>
             <GroundRing accent={z.accent} />
-            <FloatingSign label={z.label} sub={z.sub} accent={z.accent} />
+            {/* experience towers are 9 units tall — lift its sign clear of them */}
+            <FloatingSign label={z.label} sub={z.sub} accent={z.accent} y={z.id === 'experience' ? 12 : 8} />
             <Structure accent={z.accent} />
           </group>
         )

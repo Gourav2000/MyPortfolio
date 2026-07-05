@@ -52,46 +52,51 @@ a { color: var(--primary); }
 .nbtn--solid { background: var(--primary); color: #041018; }
 .nbtn--solid:hover { box-shadow: 0 0 32px rgba(77, 181, 255, 0.9); }
 
-/* ── loading screen ──────────────────────────── */
-.loading {
+/* ── entering-city veil (while 3D assets compile) ─ */
+.veil {
   position: fixed; inset: 0; z-index: 60;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 1.4rem;
+  display: flex; align-items: center; justify-content: center;
   background:
     radial-gradient(ellipse at 50% 120%, rgba(77, 181, 255, 0.16), transparent 55%),
-    radial-gradient(ellipse at 80% 0%, rgba(180, 77, 255, 0.12), transparent 50%),
     var(--bg);
-  text-align: center;
-  padding: 2rem;
-  transition: opacity 0.7s ease;
 }
-.loading.hidden { opacity: 0; pointer-events: none; }
-.loading h1 {
+.veil-text {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 6vw, 3.2rem);
-  letter-spacing: 0.22em;
-  color: #fff;
-  text-shadow: 0 0 22px rgba(77, 181, 255, 0.9), 0 0 60px rgba(77, 181, 255, 0.4);
-}
-.loading h2 {
-  font-family: var(--font-display);
-  font-size: clamp(0.7rem, 2.4vw, 1rem);
-  font-weight: 500;
-  letter-spacing: 0.5em;
+  font-size: clamp(0.8rem, 3vw, 1.1rem);
+  letter-spacing: 0.4em;
   color: var(--primary);
+  text-shadow: 0 0 18px rgba(77, 181, 255, 0.8);
+  animation: veilPulse 1.4s ease-in-out infinite;
 }
-.loading .bar {
-  width: min(340px, 70vw); height: 3px;
-  background: rgba(77, 181, 255, 0.15);
-  border-radius: 2px; overflow: hidden;
+@keyframes veilPulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+/* ── controls strip (companion to in-world WASD arrows) ─── */
+.chint2 {
+  position: fixed; z-index: 30;
+  left: 50%; bottom: 3.4rem;
+  transform: translateX(-50%);
+  padding: 0.55rem 1.2rem;
+  color: #ffffff;
+  font-size: 0.95rem; font-weight: 600; letter-spacing: 0.1em;
+  background: rgba(5, 8, 18, 0.66);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  animation: chintIn 0.5s ease both;
+  white-space: nowrap;
 }
-.loading .bar > div {
-  height: 100%; background: var(--primary);
-  box-shadow: 0 0 12px var(--primary);
-  transition: width 0.2s;
+@keyframes chintIn { from { opacity: 0; transform: translate(-50%, 12px); } to { opacity: 1; transform: translate(-50%, 0); } }
+.wkbd {
+  display: inline-block;
+  border: 1.5px solid #ffffff; border-radius: 5px;
+  padding: 0 0.5rem;
+  font-family: var(--font-display); font-size: 0.78rem; font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
-.loading .hint { color: var(--text-dim); font-size: 0.95rem; max-width: 420px; line-height: 1.5; }
-.loading .enter-row { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
 
 /* ── HUD ─────────────────────────────────────── */
 .hud { position: fixed; inset: 0; z-index: 20; pointer-events: none; }
@@ -353,14 +358,20 @@ a { color: var(--primary); }
 /* ── testimonials ────────────────────────────── */
 .testi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
 .testi {
+  display: block;
   border: 1px solid var(--border); border-radius: 14px;
   background: rgba(10, 16, 34, 0.75);
   padding: 2.6rem 1.3rem 1.2rem;
   margin-top: 2.2rem;
   position: relative; text-align: center;
-  transition: border-color 0.25s, transform 0.25s;
+  text-decoration: none; color: inherit;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
 }
-.testi:hover { border-color: #ff6ec7; transform: translateY(-3px); }
+a.testi { cursor: pointer; }
+.testi:hover {
+  border-color: #ff6ec7; transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 110, 199, 0.15);
+}
 .testi-avatar {
   position: absolute; top: -2.2rem; left: 50%; transform: translateX(-50%);
   width: 4.4rem; height: 4.4rem; border-radius: 50%;
@@ -370,31 +381,51 @@ a { color: var(--primary); }
 }
 .testi-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
 .testi blockquote { color: #d5e2f7; font-size: 0.96rem; line-height: 1.6; }
-.testi figcaption {
+.testi-caption {
   margin-top: 0.8rem;
   font-family: var(--font-display); font-size: 0.72rem; letter-spacing: 0.18em;
   color: #ff6ec7;
+}
+.testi-name { display: inline-flex; align-items: center; gap: 0.4rem; }
+.testi-li-icon {
+  width: 13px; height: 13px; color: #7ab8e0;
+  transition: color 0.2s;
+}
+.testi:hover .testi-li-icon { color: #ff6ec7; }
+.testi-title {
+  display: block; margin-top: 0.3rem;
+  font-family: var(--font-body); font-size: 0.78rem; letter-spacing: 0.02em;
+  color: var(--text-dim); text-transform: none;
 }
 
 /* ── about with photo ────────────────────────── */
 .about-flex { display: flex; gap: 1.5rem; align-items: center; }
 .about-photo {
-  flex: 0 0 200px;
+  flex: 0 0 260px;
+  aspect-ratio: 13 / 25;
   border-radius: 1.4rem;
   padding: 4px;
   background: linear-gradient(140deg, var(--primary), transparent 45%, #b44dff);
   transform: rotate(-3deg);
   transition: transform 0.35s;
+  overflow: hidden;
 }
 .about-photo:hover { transform: rotate(0deg); }
-.about-photo img { width: 100%; border-radius: 1.15rem; display: block; }
+.about-photo img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top;
+  border-radius: 1.15rem; display: block;
+}
 @media (max-width: 640px) {
   .about-flex { flex-direction: column; }
   .about-photo { flex: none; width: min(240px, 70%); }
 }
 
-.paper { border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 0.8rem; background: rgba(10, 16, 34, 0.7); }
+.paper { border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 0.8rem; background: rgba(10, 16, 34, 0.7); transition: border-color 0.2s; }
+.paper:has(a):hover { border-color: #4dff9d; }
 .paper h3 { font-size: 1.02rem; line-height: 1.45; }
+.paper h3 a { color: var(--text); text-decoration: none; }
+.paper h3 a:hover { color: #4dff9d; text-decoration: underline; }
+.paper-link-icon { color: #4dff9d; font-size: 0.85em; }
 .paper .meta { color: var(--text-dim); font-size: 0.9rem; margin-top: 0.35rem; }
 .paper .status {
   display: inline-block; margin-left: 0.5rem;

@@ -140,6 +140,8 @@ export default function Player() {
       const d2 = dx * dx + dz * dz
       if (d2 < best) { best = d2; near = zn.id }
     }
+    // central hologram → exit to the classic 2D site
+    if (!near && state.pos.x * state.pos.x + state.pos.z * state.pos.z < best) near = 'hero'
     if (near !== state.lastNear) {
       state.lastNear = near
       s.setNearZone(near)

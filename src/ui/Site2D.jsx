@@ -37,7 +37,6 @@ function useReveal(rootRef) {
 
 export default function Site2D({ webglOk }) {
   const setMode = useStore((s) => s.setMode)
-  const setPhase = useStore((s) => s.setPhase)
   const scroller = useRef()
   useReveal(scroller)
 
@@ -55,13 +54,7 @@ export default function Site2D({ webglOk }) {
           ))}
         </div>
         {webglOk && (
-          <button
-            className="nbtn nbtn--solid nav2d-3d"
-            onClick={() => {
-              setPhase('ready')
-              setMode('3d')
-            }}
-          >
+          <button className="nbtn nbtn--solid nav2d-3d" onClick={() => setMode('3d')}>
             ▶ 3D CITY
           </button>
         )}
@@ -80,13 +73,7 @@ export default function Site2D({ webglOk }) {
           <p className="dim" style={{ marginTop: '0.5rem', letterSpacing: '0.2em' }}>{PROFILE.tagline}</p>
           <div className="row">
             {webglOk && (
-              <button
-                className="nbtn nbtn--solid"
-                onClick={() => {
-                  setPhase('ready')
-                  setMode('3d')
-                }}
-              >
+              <button className="nbtn nbtn--solid" onClick={() => setMode('3d')}>
                 ▶ Explore the 3D city
               </button>
             )}

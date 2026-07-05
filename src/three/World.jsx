@@ -4,6 +4,7 @@ import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
 import City from './City'
 import Zones from './Zones'
 import Player from './Player'
+import MoveArrows from './MoveArrows'
 import { useStore } from '../store'
 
 export default function World() {
@@ -25,6 +26,7 @@ export default function World() {
         <City quality={quality} />
         <Zones />
         <Player />
+        <MoveArrows />
       </Suspense>
 
       {quality === 'high' && (

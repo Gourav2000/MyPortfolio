@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react'
 import { Canvas } from '@react-three/fiber'
 import World from './three/World'
-import LoadingScreen from './ui/LoadingScreen'
 import HUD from './ui/HUD'
 import Panel from './ui/Panel'
 import Site2D from './ui/Site2D'
+import ControlsHint, { EnterVeil } from './ui/ControlsHint'
 import { useStore } from './store'
 
 function webglSupported() {
@@ -18,7 +18,6 @@ function webglSupported() {
 
 export default function App() {
   const mode = useStore((s) => s.mode)
-  const phase = useStore((s) => s.phase)
   const touch = useStore((s) => s.touch)
   const webglOk = useMemo(webglSupported, [])
 
@@ -33,9 +32,10 @@ export default function App() {
       >
         <World />
       </Canvas>
-      <LoadingScreen />
-      {phase === 'playing' && <HUD />}
+      <HUD />
       <Panel />
+      <ControlsHint />
+      <EnterVeil />
     </div>
   )
 }

@@ -5,12 +5,12 @@ export const isTouchDevice = () =>
   typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches
 
 export const useStore = create((set) => ({
-  // 'loading' → 'ready' (enter button shown) → 'playing'
-  phase: 'loading',
+  // kept for Player's input gate; the app now goes straight to 'playing'
+  phase: 'playing',
   setPhase: (phase) => set({ phase }),
 
-  // '3d' | '2d'
-  mode: '3d',
+  // '2d' | '3d' — the classic site is the landing page; 3D is opt-in
+  mode: '2d',
   setMode: (mode) => set({ mode }),
 
   // zone id the player is standing near (null = none)
@@ -31,6 +31,10 @@ export const useStore = create((set) => ({
 
   soundOn: false,
   setSoundOn: (soundOn) => set({ soundOn }),
+
+  // first-visit movement hint (3D arrows around the character)
+  hintOn: true,
+  setHintOn: (hintOn) => set({ hintOn }),
 
   touch: isTouchDevice(),
 

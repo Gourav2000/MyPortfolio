@@ -73,7 +73,9 @@ export default function HUD() {
     return onInteract((type) => {
       const s = useStore.getState()
       if (type === 'interact') {
-        if (!s.openPanel && s.nearZone) s.setOpenPanel(s.nearZone)
+        if (s.openPanel) return
+        if (s.nearZone === 'hero') s.setMode('2d')
+        else if (s.nearZone) s.setOpenPanel(s.nearZone)
       } else if (type === 'escape') {
         if (s.openPanel) s.setOpenPanel(null)
         else if (s.menuOpen) s.setMenuOpen(false)
@@ -89,7 +91,12 @@ export default function HUD() {
     setSoundOn(!soundOn)
   }
 
-  const near = nearZone ? zoneById(nearZone) : null
+  const near =
+    nearZone === 'hero'
+      ? { id: 'hero', label: 'GOURAV SARKAR', accent: '#4db5ff', action: 'view the classic 2D site' }
+      : nearZone
+        ? zoneById(nearZone)
+        : null
 
   return (
     <div className="hud">
@@ -122,6 +129,7 @@ export default function HUD() {
               onClick={() => {
                 requestTeleport(z.x, z.z)
                 setMenuOpen(false)
+                useStore.getState().setHintOn(false) // arrows are spawn-anchored
               }}
             >
               {SECTIONS[z.id].label}
@@ -140,9 +148,11 @@ export default function HUD() {
         <div className="hud-prompt" style={{ borderColor: near.accent }}>
           <b style={{ color: near.accent }}>{near.label}</b>
           <small>
-            {touch ? 'tap VIEW to open' : (
+            {touch ? (
+              `tap VIEW to ${near.action || 'open'}`
+            ) : (
               <>
-                press <span className="kbd">E</span> to open
+                press <span className="kbd">E</span> to {near.action || 'open'}
               </>
             )}
           </small>
@@ -157,7 +167,10 @@ export default function HUD() {
         <>
           <Joystick />
           {near && (
-            <button className="touch-interact" onClick={() => setOpenPanel(near.id)}>
+            <button
+              className="touch-interact"
+              onClick={() => (near.id === 'hero' ? setMode('2d') : setOpenPanel(near.id))}
+            >
               VIEW
             </button>
           )}
