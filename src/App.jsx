@@ -1,32 +1,41 @@
-import React from 'react'
-import Header from './components/header/Header'
-import Nav from './components/nav/Nav'
-import About from './components/about/About'
-import Skills from './components/skills/Skills'
-import Experience from './components/experience/Experience'
-import Services from './components/services/Services'
-import Certifications from './components/certifications/Certifications'
-import Portfolio from './components/portfolio/Portfolio'
-import Testimonials from './components/testimonials/Testimonials'
-import Contact from './components/contact/Contact'
-import Footer from './components/footer/Footer'
+import React, { useMemo } from 'react'
+import { Canvas } from '@react-three/fiber'
+import World from './three/World'
+import LoadingScreen from './ui/LoadingScreen'
+import HUD from './ui/HUD'
+import Panel from './ui/Panel'
+import Site2D from './ui/Site2D'
+import { useStore } from './store'
 
-
-const App = () => {
-  return (
-    <>
-        <Header/>
-        <Nav/>
-        <About/>
-        <Experience/>
-        <Skills/>
-        <Certifications/>
-        <Portfolio/>
-        <Testimonials/>
-        <Contact/>
-        <Footer/>
-    </>
-  )
+function webglSupported() {
+  try {
+    const c = document.createElement('canvas')
+    return !!(window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl')))
+  } catch {
+    return false
+  }
 }
 
-export default App
+export default function App() {
+  const mode = useStore((s) => s.mode)
+  const phase = useStore((s) => s.phase)
+  const touch = useStore((s) => s.touch)
+  const webglOk = useMemo(webglSupported, [])
+
+  if (mode === '2d' || !webglOk) return <Site2D webglOk={webglOk} />
+
+  return (
+    <div className="app-3d">
+      <Canvas
+        dpr={[1, touch ? 1.5 : 2]}
+        camera={{ fov: 55, near: 0.1, far: 600, position: [0, 5.5, 23] }}
+        gl={{ antialias: true, powerPreference: 'high-performance' }}
+      >
+        <World />
+      </Canvas>
+      <LoadingScreen />
+      {phase === 'playing' && <HUD />}
+      <Panel />
+    </div>
+  )
+}
