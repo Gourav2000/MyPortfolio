@@ -1,7 +1,7 @@
 import React, { useRef, useMemo } from 'react'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
-import { Text, Billboard } from '@react-three/drei'
+import { Text, Billboard, useTexture } from '@react-three/drei'
 import { ZONES } from './layout'
 import { SECTIONS, PROFILE } from '../data/content'
 
@@ -445,8 +445,56 @@ function SignalTower({ accent }) {
   )
 }
 
+function HallOfAllies({ accent }) {
+  const reviews = SECTIONS.testimonials.reviews
+  const textures = useTexture(reviews.map((r) => r.avatar))
+  const carousel = useRef()
+  useFrame(({ clock }) => {
+    const t = clock.elapsedTime
+    carousel.current.rotation.y = t * 0.28
+    carousel.current.children.forEach((card, i) => {
+      card.position.y = 3.1 + Math.sin(t * 1.3 + i * 1.6) * 0.22
+    })
+  })
+  return (
+    <group>
+      {/* central pillar */}
+      <mesh position={[0, 1.1, 0]}>
+        <cylinderGeometry args={[0.5, 0.8, 2.2, 12]} />
+        <meshStandardMaterial color="#131629" metalness={0.7} roughness={0.3} />
+      </mesh>
+      <mesh position={[0, 2.35, 0]}>
+        <sphereGeometry args={[0.32, 16, 16]} />
+        {glow(accent, 0.95)}
+      </mesh>
+      {/* orbiting holographic portrait cards */}
+      <group ref={carousel}>
+        {textures.map((tex, i) => {
+          const a = (i / textures.length) * Math.PI * 2
+          const x = Math.sin(a) * 3.2
+          const z = Math.cos(a) * 3.2
+          return (
+            <group key={i} position={[x, 3.1, z]} rotation={[0, a, 0]}>
+              <mesh>
+                <planeGeometry args={[1.7, 1.7]} />
+                <meshBasicMaterial map={tex} toneMapped={false} side={THREE.DoubleSide} />
+              </mesh>
+              <mesh position={[0, 0, -0.02]}>
+                <planeGeometry args={[1.9, 1.9]} />
+                <meshBasicMaterial color={accent} toneMapped={false} transparent opacity={0.55} side={THREE.DoubleSide} />
+              </mesh>
+            </group>
+          )
+        })}
+      </group>
+      <pointLight position={[0, 4, 0]} color={accent} intensity={11} distance={16} />
+    </group>
+  )
+}
+
 const STRUCTURES = {
   about: AboutCore,
+  testimonials: HallOfAllies,
   experience: ExperienceTowers,
   skills: SkillCrystals,
   projects: ProjectBillboards,

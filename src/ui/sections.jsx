@@ -8,7 +8,12 @@ function AboutBody() {
   const s = SECTIONS.about
   return (
     <>
-      <p className="lead">{s.intro}</p>
+      <div className="about-flex">
+        <div className="about-photo">
+          <img src={PROFILE.aboutPhoto} alt="Gourav Sarkar" />
+        </div>
+        <p className="lead">{s.intro}</p>
+      </div>
       <div className="fact-grid">
         {s.facts.map((f) => (
           <div className="fact" key={f.v}>
@@ -63,25 +68,55 @@ function SkillsBody() {
 function ProjectsBody() {
   const s = SECTIONS.projects
   return (
-    <div className="card-grid">
-      {s.featured.map((p) => (
-        <article className="card featured" key={p.title}>
-          <h3>{p.title}</h3>
-          <p>{p.desc}</p>
-          <div className="tags">{p.tags.map((t) => <span key={t}>{t}</span>)}</div>
-          <div className="links">
-            <a href={p.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+    <>
+      <div className="pcard-featured-grid">
+        {s.featured.map((p) => (
+          <article className="pcard pcard--featured" key={p.title}>
+            <div className="pcard-img">
+              <img src={p.image} alt={p.title} loading="lazy" />
+            </div>
+            <div className="pcard-body">
+              <h3>{p.title}</h3>
+              <p>{p.desc}</p>
+              <div className="tags">{p.tags.map((t) => <span key={t}>{t}</span>)}</div>
+              <div className="links">
+                <a className="nbtn" href={p.github} target="_blank" rel="noreferrer">GitHub</a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div className="pcard-grid">
+        {s.more.map((p) => (
+          <article className="pcard" key={p.title}>
+            <div className="pcard-img">
+              <img src={p.image} alt={p.title} loading="lazy" />
+              <div className="pcard-overlay">
+                <a className="nbtn" href={p.github} target="_blank" rel="noreferrer">GitHub</a>
+              </div>
+            </div>
+            <div className="pcard-body">
+              <h3>{p.title}</h3>
+              <p>{p.desc}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </>
+  )
+}
+
+function TestimonialsBody() {
+  return (
+    <div className="testi-grid">
+      {SECTIONS.testimonials.reviews.map((r, i) => (
+        <figure className="testi" key={i}>
+          <div className="testi-avatar">
+            <img src={r.avatar} alt={r.name} loading="lazy" />
           </div>
-        </article>
-      ))}
-      {s.more.map((p) => (
-        <article className="card" key={p.title}>
-          <h3>{p.title}</h3>
-          <p>{p.desc}</p>
-          <div className="links">
-            <a href={p.github} target="_blank" rel="noreferrer">GitHub ↗</a>
-          </div>
-        </article>
+          <blockquote>“{r.review}”</blockquote>
+          <figcaption>{r.name}</figcaption>
+        </figure>
       ))}
     </div>
   )
@@ -129,10 +164,13 @@ function CertificationsBody() {
     <>
       {SECTIONS.certifications.certs.map((c) => (
         <div className="cert" key={c.title}>
-          <div>
-            <h3>{c.title}</h3>
-            <div className="meta">
-              {c.issuer} · Issued {c.time} · ID {c.credId}
+          <div className="cert-main">
+            <img className="cert-badge" src={c.image} alt={c.issuer} loading="lazy" />
+            <div>
+              <h3>{c.title}</h3>
+              <div className="meta">
+                {c.issuer} · Issued {c.time} · ID {c.credId}
+              </div>
             </div>
           </div>
           <a className="nbtn" href={c.url} target="_blank" rel="noreferrer">Verify</a>
@@ -206,6 +244,7 @@ function ContactBody() {
 
 const BODIES = {
   about: AboutBody,
+  testimonials: TestimonialsBody,
   experience: ExperienceBody,
   skills: SkillsBody,
   projects: ProjectsBody,
@@ -228,6 +267,7 @@ export const SECTION_EYEBROWS = {
   projects: 'Billboard alley · Things I built',
   publications: 'The archive · Research',
   achievements: 'Trophy plaza · Wins',
+  testimonials: 'Hall of allies · What people say',
   certifications: 'Badge vault · Verified',
   education: 'The academy · Where I studied',
   contact: 'Signal tower · Get in touch',

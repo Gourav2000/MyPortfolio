@@ -4,7 +4,30 @@
 // Content sourced from Resume (2026) + previous portfolio site.
 // ─────────────────────────────────────────────────────────────
 
+import ME from '../assets/me.png'
+import ME_ABOUT from '../assets/me-about.jpg'
+import DEVFORGE_COVER from '../assets/devforge-cover.svg'
+import GLIMPSEDESK_COVER from '../assets/glimpsedesk-cover.svg'
+import IMG_COVID from '../assets/portfolio1.jpg'
+import IMG_DOCSCAN from '../assets/portfolio2.jpg'
+import IMG_S2F from '../assets/portfolio3.jpg'
+import IMG_TOX from '../assets/portfolio4.jpg'
+import IMG_KEYLOG from '../assets/portfolio5.jpg'
+import IMG_WIFI from '../assets/portfolio6.jpg'
+import IMG_CHAT from '../assets/portfolio7.jpg'
+import IMG_MORSE from '../assets/portfolio8.jpg'
+import IMG_AUTOTYPE from '../assets/portfolio9.jpg'
+import BADGE_PCA from '../assets/pca.png'
+import BADGE_ACE from '../assets/ace.png'
+import BADGE_AZ900 from '../assets/az900.png'
+import AVTR1 from '../assets/avatar1.jpg'
+import AVTR2 from '../assets/avatar2.jpg'
+import AVTR3 from '../assets/avatar3.jpg'
+import AVTR4 from '../assets/avatar4.jpg'
+
 export const PROFILE = {
+  photo: ME,
+  aboutPhoto: ME_ABOUT,
   name: 'GOURAV SARKAR',
   role: 'Software Engineer @ ServiceNow',
   tagline: 'Backend · Cloud · AI Agents',
@@ -121,6 +144,7 @@ export const SECTIONS = {
           'returns cited answers (file:line-range) via any Ollama-compatible model. Zero cloud dependency.',
         tags: ['Python', 'RAG', 'BM25 + Vectors', 'Ollama', 'CLI'],
         github: 'https://github.com/Gourav2000/DevForge',
+        image: DEVFORGE_COVER,
       },
       {
         title: 'GlimpseDesk',
@@ -129,16 +153,19 @@ export const SECTIONS = {
           'native OS folder picker, video preview and markdown rendering. Fully local, no cloud dependency.',
         tags: ['Electron', 'JavaScript', 'Desktop'],
         github: 'https://github.com/Gourav2000/GlimpseDesk',
+        image: GLIMPSEDESK_COVER,
       },
     ],
     more: [
-      { title: 'Spring2Flask', desc: 'Migration toolkit / bridge between Spring and Flask services.', github: 'https://github.com/Gourav2000/Spring2Flask' },
-      { title: 'Api_toxicity', desc: 'Toxicity detection API for user-generated content.', github: 'https://github.com/Gourav2000/Api_toxicity' },
-      { title: 'doc_scanner', desc: 'Computer-vision document scanner.', github: 'https://github.com/Gourav2000/doc_scanner' },
-      { title: 'Chat-app using Firebase', desc: 'Realtime chat application on Firebase.', github: 'https://github.com/Gourav2000/Chat-app_using_firebase' },
-      { title: 'Covid-19 Status', desc: 'Live COVID-19 tracking dashboard.', github: 'https://github.com/Gourav2000/Covid-19_status' },
-      { title: 'MorseCode Translator', desc: 'Bidirectional Morse code translator.', github: 'https://github.com/Gourav2000/MorseCode_translator' },
-      { title: 'autotype', desc: 'Automation tool that types for you.', github: 'https://github.com/Gourav2000/autotype' },
+      { title: 'Spring2Flask', desc: 'Migration toolkit / bridge between Spring and Flask services.', github: 'https://github.com/Gourav2000/Spring2Flask', image: IMG_S2F },
+      { title: 'Api_toxicity', desc: 'Toxicity detection API for user-generated content.', github: 'https://github.com/Gourav2000/Api_toxicity', image: IMG_TOX },
+      { title: 'doc_scanner', desc: 'Computer-vision document scanner.', github: 'https://github.com/Gourav2000/doc_scanner', image: IMG_DOCSCAN },
+      { title: 'Chat-app using Firebase', desc: 'Realtime chat application on Firebase.', github: 'https://github.com/Gourav2000/Chat-app_using_firebase', image: IMG_CHAT },
+      { title: 'Covid-19 Status', desc: 'Live COVID-19 tracking dashboard.', github: 'https://github.com/Gourav2000/Covid-19_status', image: IMG_COVID },
+      { title: 'KeyLogger (Python)', desc: 'Security research: keylogger/spyware proof-of-concept.', github: 'https://github.com/Gourav2000/KeyLogger-Spyware--Python', image: IMG_KEYLOG },
+      { title: 'WiFi Password Extraction', desc: 'Windows saved-WiFi credential extraction tool.', github: 'https://github.com/Gourav2000/Windows_Wifi_Password_Extraction', image: IMG_WIFI },
+      { title: 'MorseCode Translator', desc: 'Bidirectional Morse code translator.', github: 'https://github.com/Gourav2000/MorseCode_translator', image: IMG_MORSE },
+      { title: 'autotype', desc: 'Automation tool that types for you.', github: 'https://github.com/Gourav2000/autotype', image: IMG_AUTOTYPE },
     ],
   },
 
@@ -215,6 +242,7 @@ export const SECTIONS = {
       {
         title: 'GCP Professional Cloud Architect',
         issuer: 'Google Cloud',
+        image: BADGE_PCA,
         time: 'Jan 2023',
         credId: '8fHaXo',
         url: 'https://www.credential.net/9aea7dd8-d5cd-4f2e-be63-2ad89c41094e?key=52d7eb4ee4e65d14ad8f6130e3491de45fe6ea46d9840cc126f98cb6325d9f85#gs.nb9l40',
@@ -222,6 +250,7 @@ export const SECTIONS = {
       {
         title: 'GCP Associate Cloud Engineer',
         issuer: 'Google Cloud',
+        image: BADGE_ACE,
         time: 'Oct 2022',
         credId: '60698263',
         url: 'https://www.credential.net/5924425b-2751-4cc2-91b0-87813c028790',
@@ -229,6 +258,7 @@ export const SECTIONS = {
       {
         title: 'Microsoft Azure Fundamentals (AZ-900)',
         issuer: 'Microsoft',
+        image: BADGE_AZ900,
         time: 'Jun 2022',
         credId: '288236bc-8735-4358-b522-824c92885118',
         url: 'https://www.credly.com/badges/da9c5793-ec36-44f8-ab0c-46ed871a391b',
@@ -248,6 +278,39 @@ export const SECTIONS = {
         place: 'Kolkata, India',
         time: '07/2018 – 06/2022',
         detail: 'CGPA 9.39 / 10',
+      },
+    ],
+  },
+
+  testimonials: {
+    id: 'testimonials',
+    label: 'TESTIMONIALS',
+    sub: 'Hall of Allies',
+    accent: '#ff6ec7',
+    reviews: [
+      {
+        avatar: AVTR1,
+        name: 'Paraj Bhattacharya',
+        review:
+          'I had the privilege of being acquainted with Gourav during our time in college, where he consistently demonstrated a strong work ethic, exceptional communication skills, and an unyielding commitment to achieving excellence.',
+      },
+      {
+        avatar: AVTR2,
+        name: 'Earnest Achiever',
+        review:
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam illo distinctio asperiores autem consequuntur reiciendis odio voluptatem molestias. Ex, temporibus.',
+      },
+      {
+        avatar: AVTR3,
+        name: 'Earnest Achiever',
+        review:
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam illo distinctio asperiores autem consequuntur reiciendis odio voluptatem molestias. Ex, temporibus.',
+      },
+      {
+        avatar: AVTR4,
+        name: 'Earnest Achiever',
+        review:
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam illo distinctio asperiores autem consequuntur reiciendis odio voluptatem molestias. Ex, temporibus.',
       },
     ],
   },
@@ -273,6 +336,7 @@ export const ZONE_ORDER = [
   'projects',
   'publications',
   'achievements',
+  'testimonials',
   'certifications',
   'education',
   'contact',
