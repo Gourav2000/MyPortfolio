@@ -27,7 +27,7 @@ export default function Player() {
       yaw: Math.PI, // facing the center hologram at spawn
       camYaw: Math.PI,
       speed: 0,
-      lastStoreWrite: 0,
+      storeAcc: 1, // accumulated dt since last minimap write (starts due)
       lastNear: undefined,
     }),
     []
@@ -145,11 +145,14 @@ export default function Player() {
       s.setNearZone(near)
     }
 
-    // minimap position (throttled to ~10 Hz)
-    if (t - state.lastStoreWrite > 0.1) {
-      state.lastStoreWrite = t
+    // minimap position (throttled to ~10 Hz; dt-based so a clock
+    // reset across remounts can never wedge the updates)
+    state.storeAcc += dt
+    if (state.storeAcc > 0.1) {
+      state.storeAcc = 0
       s.setPlayerPos({ x: state.pos.x, z: state.pos.z, rot: state.yaw })
     }
+    if (typeof window !== 'undefined') window.__pos = state.pos
   })
 
   return (

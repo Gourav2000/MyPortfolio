@@ -290,21 +290,21 @@ export const SECTIONS = {
     reviews: [
       {
         avatar: AVTR1,
+        name: 'Cladius Fernando',
+        review:
+          'I interviewed Gourav for a fitment into my project. Halfway into the interview I realized that he is quite passionate about technology and had the attitude required to wrestle with a problem and come out as a victor. He picked up very fast and did a splendid job. I was pleased to work with him. Gourav continues to upskill himself by learning. This coupled with his attitude towards work will take him far in his career.',
+      },
+      {
+        avatar: AVTR2,
         name: 'Paraj Bhattacharya',
         review:
           'I had the privilege of being acquainted with Gourav during our time in college, where he consistently demonstrated a strong work ethic, exceptional communication skills, and an unyielding commitment to achieving excellence.',
       },
       {
-        avatar: AVTR2,
-        name: 'Earnest Achiever',
-        review:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam illo distinctio asperiores autem consequuntur reiciendis odio voluptatem molestias. Ex, temporibus.',
-      },
-      {
         avatar: AVTR3,
-        name: 'Earnest Achiever',
+        name: 'Tathagata Nandi',
         review:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam illo distinctio asperiores autem consequuntur reiciendis odio voluptatem molestias. Ex, temporibus.',
+          "I had the pleasure of working with Gourav in a hackathon, where he served as the lead for our team's project. I was impressed with Gourav's technical skills, leadership abilities, and creativity. He took charge of the project's architecture from the outset and led us through its development, ensuring that our code was modular and efficient. Gourav quickly grasped the project requirements and offered innovative solutions to challenges that arose during the hackathon. His attention to detail and dedication to the project's success was evident throughout, and he was always willing to go the extra mile to ensure that our team delivered a quality product. Overall, I was impressed with his ability to work collaboratively with the team and his passion for technologies.",
       },
       {
         avatar: AVTR4,

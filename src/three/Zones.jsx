@@ -1,7 +1,7 @@
-import React, { useRef, useMemo } from 'react'
+import React, { useRef, useMemo, useState, useEffect } from 'react'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
-import { Text, Billboard, useTexture } from '@react-three/drei'
+import { Text, Billboard } from '@react-three/drei'
 import { ZONES } from './layout'
 import { SECTIONS, PROFILE } from '../data/content'
 
@@ -100,18 +100,25 @@ function ExperienceTowers({ accent }) {
               {glow(accent, 0.95)}
             </mesh>
           ))}
-          <Text
-            position={[0, t.h / 2, 1.36]}
-            fontSize={0.5}
-            color="#ffffff"
-            anchorX="center"
-            anchorY="middle"
-            rotation={[0, 0, Math.PI / 2]}
-            maxWidth={t.h - 1}
-          >
-            {t.name.toUpperCase()}
-            <meshBasicMaterial toneMapped={false} color="#dff4ff" />
-          </Text>
+          {/* company name on front AND back faces */}
+          {[
+            { pos: [0, t.h / 2, 1.36], rot: [0, 0, Math.PI / 2] },
+            { pos: [0, t.h / 2, -1.36], rot: [0, Math.PI, Math.PI / 2] },
+          ].map((f, k) => (
+            <Text
+              key={k}
+              position={f.pos}
+              fontSize={0.5}
+              color="#ffffff"
+              anchorX="center"
+              anchorY="middle"
+              rotation={f.rot}
+              maxWidth={t.h - 1}
+            >
+              {t.name.toUpperCase()}
+              <meshBasicMaterial toneMapped={false} color="#dff4ff" />
+            </Text>
+          ))}
           <mesh position={[0, t.h + 0.35, 0]}>
             <boxGeometry args={[2.8, 0.16, 2.8]} />
             {glow(accent, 0.9)}
@@ -257,6 +264,22 @@ function PublicationArchive({ accent }) {
           <meshBasicMaterial color="#dffcf0" toneMapped={false} side={THREE.DoubleSide} transparent opacity={0.9} />
         </mesh>
       ))}
+      {/* venue labels — always face the camera */}
+      {SECTIONS.publications.papers.map((p, i) => {
+        const a = (i / 3) * Math.PI * 2
+        const venue = p.venue.split('·')[0].trim()
+        return (
+          <Billboard key={venue} position={[Math.sin(a) * 4.4, 6.1, Math.cos(a) * 4.4]}>
+            <Text fontSize={0.46} color={accent} anchorX="center" letterSpacing={0.08} outlineWidth={0.015} outlineColor="#000000">
+              {venue}
+              <meshBasicMaterial toneMapped={false} color={accent} />
+            </Text>
+            <Text position={[0, -0.55, 0]} fontSize={0.28} color="#cdeee0" anchorX="center" letterSpacing={0.12}>
+              {p.status.toUpperCase()}
+            </Text>
+          </Billboard>
+        )
+      })}
       <pointLight position={[0, 4, 0]} color={accent} intensity={12} distance={16} />
     </group>
   )
@@ -447,7 +470,19 @@ function SignalTower({ accent }) {
 
 function HallOfAllies({ accent }) {
   const reviews = SECTIONS.testimonials.reviews
-  const textures = useTexture(reviews.map((r) => r.avatar))
+  // manual (non-suspending) texture load — avoids wedging the whole
+  // scene's Suspense if a texture promise misbehaves in dev
+  const [textures, setTextures] = useState([])
+  useEffect(() => {
+    let alive = true
+    const loader = new THREE.TextureLoader()
+    Promise.all(reviews.map((r) => loader.loadAsync(r.avatar))).then((loaded) => {
+      if (!alive) return
+      loaded.forEach((t) => (t.colorSpace = THREE.SRGBColorSpace))
+      setTextures(loaded)
+    })
+    return () => { alive = false }
+  }, [reviews])
   const carousel = useRef()
   useFrame(({ clock }) => {
     const t = clock.elapsedTime
@@ -526,17 +561,25 @@ export function HeroPlaza() {
         <meshBasicMaterial color="#4db5ff" transparent opacity={0.07} toneMapped={false} side={THREE.DoubleSide} depthWrite={false} />
       </mesh>
       <group ref={holo}>
-        <Text position={[0, 5.2, 0]} fontSize={1.35} color="#ffffff" anchorX="center" letterSpacing={0.14} outlineWidth={0.03} outlineColor="#4db5ff">
-          {PROFILE.name}
-          <meshBasicMaterial toneMapped={false} color="#eaf7ff" />
-        </Text>
-        <Text position={[0, 3.9, 0]} fontSize={0.52} color="#4db5ff" anchorX="center" letterSpacing={0.24}>
-          {PROFILE.role.toUpperCase()}
-          <meshBasicMaterial toneMapped={false} color="#4db5ff" />
-        </Text>
-        <Text position={[0, 3.05, 0]} fontSize={0.36} color="#9fd4ff" anchorX="center" letterSpacing={0.3}>
-          {PROFILE.tagline.toUpperCase()}
-        </Text>
+        {/* same text on both faces so the rotating hologram never goes blank */}
+        {[0, Math.PI].map((flip) => (
+          <group key={flip} rotation={[0, flip, 0]}>
+            <Text position={[0, 5.2, 0.02]} fontSize={1.35} color="#ffffff" anchorX="center" letterSpacing={0.14} outlineWidth={0.03} outlineColor="#4db5ff">
+              {PROFILE.name}
+              <meshBasicMaterial toneMapped={false} color="#eaf7ff" />
+            </Text>
+            <Text position={[0, 3.9, 0.02]} fontSize={0.52} color="#4db5ff" anchorX="center" letterSpacing={0.24}>
+              {PROFILE.role.toUpperCase()}
+              <meshBasicMaterial toneMapped={false} color="#4db5ff" />
+            </Text>
+            <Text position={[0, 3.05, 0.02]} fontSize={0.36} color="#9fd4ff" anchorX="center" letterSpacing={0.3}>
+              {PROFILE.tagline.toUpperCase()}
+              {/* explicit front-side material: troika's default is double-sided,
+                  which garbles against the mirrored back copy */}
+              <meshBasicMaterial toneMapped={false} color="#9fd4ff" />
+            </Text>
+          </group>
+        ))}
       </group>
       <pointLight position={[0, 6, 0]} color="#4db5ff" intensity={18} distance={24} />
     </group>
@@ -551,7 +594,8 @@ export default function Zones() {
       {ZONES.map((z) => {
         const Structure = STRUCTURES[z.id]
         return (
-          <group key={z.id} position={[z.x, 0, z.z]} rotation={[0, z.angle, 0]}>
+          // -angle so each structure's +z face points back at the plaza
+          <group key={z.id} position={[z.x, 0, z.z]} rotation={[0, -z.angle, 0]}>
             <GroundRing accent={z.accent} />
             <FloatingSign label={z.label} sub={z.sub} accent={z.accent} />
             <Structure accent={z.accent} />
